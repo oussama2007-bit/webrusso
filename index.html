@@ -1,0 +1,274 @@
+Web 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Hacker Web</title>
+    <!-- Include FontAwesome CDN for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* General reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background-color: #121212;
+            color: #00FF41;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Typing Effect for Code Snippets */
+        .typing-effect {
+            display: inline-block;
+            border-right: 3px solid #00FF41;
+            padding-right: 5px;
+            font-size: 1rem;
+            color: #00FF41;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 2s steps(20) 1s 1 normal both, blink 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* Console Simulation */
+        .console {
+            background-color: black;
+            width: 50%;
+            max-width: 800px;
+            height: 300px;
+            padding: 20px;
+            border: 2px solid #00FF41;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .output {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 1.2rem;
+        }
+
+        .input-line {
+            display: flex;
+        }
+
+        .input-line .prompt {
+            color: #ff007f;
+            margin-right: 10px;
+        }
+
+        .input-line input {
+            background-color: transparent;
+            border: none;
+            outline: none;
+            color: #00FF41;
+            font-size: 1.2rem;
+            width: 100%;
+        }
+
+        /* Matrix Rain */
+        .matrix-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            pointer-events: none;
+        }
+
+        .matrix-rain span {
+            position: absolute;
+            top: 0;
+            animation: falling 1s linear infinite;
+        }
+
+        @keyframes falling {
+            from {
+                opacity: 0;
+                transform: translateY(-100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(100vh);
+            }
+        }
+
+        /* Dark Mode Toggle */
+        button {
+            background-color: #00FF41;
+            color: #121212;
+            font-size: 1.rem;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #ff007f;
+        }
+
+        /* Hacker Progress Bar */
+        .progress-container {
+            width: 100%;
+            max-width: 800px;
+            margin-top: 0px;
+        }
+
+        .progress-bar {
+            width: 0;
+            height: 5px;
+            background-color: #00FF41;
+            animation: progress 10s forwards;
+        }
+
+        @keyframes progress {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        .light-mode {
+            background-color: #f0f0f0;
+            color: #121212;
+        }
+
+        .light-mode button {
+            background-color: #121212;
+            color: #00FF41;
+        }
+
+        /* Link Buttons Style */
+        .link-buttons {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            display: none; /* Initially hidden */
+        }
+
+        .link-buttons a {
+            color: #00FF41;
+            font-size: 3rem;
+            text-decoration: none;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+        .link-buttons a:hover {
+            transform: scale(1.2);
+            color: #ff007f;
+        }
+
+        .link-buttons a:active {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Typing Effect Code Snippets -->
+    
+    <div class="typing-effect">  </div> {bargewi}
+  
+
+    <!-- Console Simulation -->
+    <div class="console">
+        <div class="output" id="output"></div>
+        <div class="input-line">
+            <span class="prompt">C:\></span>
+            <input type="text" id="input" autofocus />
+        </div>
+    </div>
+
+    <!-- Matrix Rain (Falling Characters) -->
+    <div class="matrix-rain">
+        <span style="animation-delay: 0s;">☠</span>
+        <span style="animation-delay: 1s;"></span>
+        <span style="animation-delay: 2s;"></span>
+        <span style="animation-delay: 3s;"></span>
+        <span style="animation-delay: 4s;"></span>
+    </div>
+
+    <!-- Link Buttons (Initially Hidden) -->
+    <div class="link-buttons" id="linkButtons">
+        <!-- Instagram Button -->
+        <a href="https://www.instagram.com" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+
+        <!-- GitHub Button -->
+        <a href="https://github.com" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+
+        <!-- Discord Button -->
+        <a href="https://discord.com" target="_blank" title="Discord"><i class="fab fa-discord"></i></a>
+    </div>
+
+    <!-- Dark Mode Toggle Button -->
+    <button id="toggle">Dark Mode</button>
+
+    <!-- Progress Bar (Hacker Progress) -->
+    <div class="progress-container">
+        <div class="progress-bar"></div>
+    </div>
+
+    <script>
+        // Handle User Input in the Console
+        const inputElement = document.getElementById("input");
+        const outputElement = document.getElementById("output");
+
+        inputElement.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                let command = inputElement.value.trim();
+                inputElement.value = "";
+
+                // Show the user's command in the output
+                outputElement.innerHTML += `C:\\> ${command}\n`;
+
+                // Process the command
+                if (command === "Russo") {
+                    outputElement.innerHTML += "Accessing...☠\n";
+                    setTimeout(() => {
+
+                       outputElement.innerHTML += "Success: conected!\n";
+                        document.getElementById("linkButtons").style.display = "flex"; // Show buttons
+                    }, 2000);
+                } else {
+                    outputElement.innerHTML += "Unknown command. Type 'Russo' to proceed.\n";
+                }
+
+                // Scroll to the bottom to show the latest output
+                outputElement.scrollTop = outputElement.scrollHeight;
+            }
+        });
+
+        // Dark Mode Toggle Script
+        document.getElementById("toggle").addEventListener("click", function() {
+            document.body.classList.toggle("light-mode");
+        });
+    </script>
+</body>
+</html>
